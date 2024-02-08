@@ -22,3 +22,15 @@ $ gunicorn -w 4 -b 0.0.0.0:5000 'app:create_app()'
 $ docker build -t habits_tracker:latest .
 $ docker run -it -p 5000:5000 -e MONGODB_URI="mongodb://<YOUR_USER>:<YOUR_PASSWORD>@<YOUR_MONGODB>:27017/habits" -e DB_NAME="habits" habits_tracker:latest
 ```
+
+5. Run with docker-compose
+
+a. create .env file or set env variables
+```bash
+$ export DB_USERNAME=mongoadmin
+$ export DB_PASSWORD=<your_password>
+```
+b. run docker-compose
+```bash
+$ docker-compose up -d
+```

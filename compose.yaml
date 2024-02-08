@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  app:
+    build: .
+    container_name: habit_tracker
+    restart: always
+    ports:
+      - 5000:5000
+    environment:
+      MONGODB_URI: "mongodb://${DB_USERNAME}:${DB_PASSWORD}@mongo:27017/habits?authSource=admin"
+      DB_NAME: habits
+    depends_on:
+      - mongo
+  
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    restart: always
+    command: mongod --auth
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MONGO_INITDB_DATABASE: habits

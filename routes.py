@@ -12,10 +12,12 @@ def add_calc_date_range():
         return dates
     return {'date_range': date_range}
 
+# Just a simple function
 def today_at_midnight():
     today = datetime.datetime.today()
     return datetime.datetime(today.year, today.month, today.day)
 
+# Index of the page, shows the calendar and the list of habits
 @pages.route("/")
 def index():
     date_str = request.args.get("date")
@@ -38,6 +40,7 @@ def index():
                            selected_date=selected_date
                            )
 
+# Add a new habit to the daily list
 @pages.route("/add", methods=["GET", "POST"])
 def add_habit():
     today = today_at_midnight()
@@ -53,6 +56,7 @@ def add_habit():
             selected_date=today # because we want to add habits for today  
         )
 
+# Check the habit as complete on the day
 @pages.route("/complete", methods=["POST"])
 def complete():
     date_string = request.form.get("date")
