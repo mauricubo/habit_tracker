@@ -1,5 +1,6 @@
 import datetime
 import uuid
+import socket
 from flask import Blueprint, current_app, render_template, redirect, request, url_for
 
 pages = Blueprint("habits", __name__, template_folder="templates", static_folder="static")
@@ -16,6 +17,9 @@ def add_calc_date_range():
 def today_at_midnight():
     today = datetime.datetime.today()
     return datetime.datetime(today.year, today.month, today.day)
+
+def get_hostname():
+    return socket.gethostname()
 
 # Index of the page, shows the calendar and the list of habits
 @pages.route("/")
@@ -37,7 +41,8 @@ def index():
                            title="Habit Tracker - Home", 
                            # date_range=date_range, removed from here because was added to the context 
                            completions=completions,
-                           selected_date=selected_date
+                           selected_date=selected_date,
+                           hostname=get_hostname()
                            )
 
 # Add a new habit to the daily list
@@ -53,7 +58,8 @@ def add_habit():
     return render_template(
             "add_habit.html", 
             title="Habit Tracker - Add Habit",
-            selected_date=today # because we want to add habits for today  
+            selected_date=today, # because we want to add habits for today  
+            hostname=get_hostname()
         )
 
 # Check the habit as complete on the day

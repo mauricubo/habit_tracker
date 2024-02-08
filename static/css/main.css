@@ -167,3 +167,16 @@ body {
     background-color: unset;
     cursor: pointer;
 }
+
+.show_hostname {
+    display: flex;
+    align-items: center;
+    margin-top: 100px;
+    background-color: #e5e5e5;
+    padding: 10px 0;
+}
+
+.hostname_text {
+    margin: 0 auto;
+    font-size: 13px;
+}
